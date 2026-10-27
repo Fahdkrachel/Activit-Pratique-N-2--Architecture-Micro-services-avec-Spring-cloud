@@ -1,16 +1,11 @@
 package com.krachelfahd.billingservice.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.krachelfahd.billingservice.model.Product;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
 public class ProductItem {
     @Id
     @GeneratedValue
@@ -20,5 +15,8 @@ public class ProductItem {
     private double price;
     @ManyToOne
     private Bill bill;
+
+    @Transient
+    private Product product;
 
 }

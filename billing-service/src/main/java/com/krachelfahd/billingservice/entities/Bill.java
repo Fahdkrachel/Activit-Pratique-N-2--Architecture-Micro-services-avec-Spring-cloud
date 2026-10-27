@@ -1,13 +1,8 @@
 package com.krachelfahd.billingservice.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.krachelfahd.billingservice.model.Customer;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -16,13 +11,20 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Bill {
     @Id
     @GeneratedValue
     private Long id;
     private Date billingDate;
-    // ce attribut pour representer dependence entre cusomer et billing service
+    // ce attribut pour  representer la lisain entre les microservicies
     private long customerId;
     @OneToMany(mappedBy = "bill")
     private List<ProductItem> productItems;
+
+    /* ona utiliser objet Customer du classe package model pour representer  DI
+     et Transient pour ne pas enregistrer ce attribut dans base de donnes de ce microsservices */
+
+    @Transient
+    private Customer customer;
 }
